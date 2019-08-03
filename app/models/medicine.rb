@@ -4,4 +4,7 @@ class Medicine < ApplicationRecord
 
     errors.add(:base, 'sorry, you must pass a valid amount to value and quantity.')
   end
+
+  # Validations
+  validates :value, :quantity, presence: true
 end

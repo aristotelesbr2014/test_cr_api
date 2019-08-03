@@ -21,4 +21,9 @@ RSpec.describe Medicine, type: :model do
       end
     end
   end
+
+  describe 'Validations' do
+    it { should validate_presence_of(:value) }
+    it { should validate_presence_of(:quantity) }
+  end
 end
