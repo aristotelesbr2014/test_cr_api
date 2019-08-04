@@ -15,4 +15,8 @@ class Medicine < ApplicationRecord
   def decrement_stock(amount)
     update_attribute(:stock, (stock - amount))
   end
+
+  def increment_stock(amount)
+    update_attribute(:stock, (stock + amount))
+  end
 end

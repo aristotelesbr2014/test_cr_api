@@ -12,19 +12,13 @@ module Carts
     end
 
     def perform
-      save_item if create_or_find_cart
+      save_item
       # sent_notification
     end
 
     private
 
     attr_reader :medicine, :cart
-
-    def create_or_find_cart
-      @cart.save.tap do |_success|
-        handle_errors unless success?
-      end
-    end
 
     def save_item
       @cart_item = @cart.cart_items.find_or_create_by(
@@ -33,7 +27,7 @@ module Carts
 
       return stock_error_message if @medicine.unavailable_stock?(@amount)
 
-      @medicine.decrement_stock(@amount)
+      @cart_item.increment_quantity(@amount) if @medicine.decrement_stock(@amount)
       @cart_item.save.tap do |_success|
         handle_errors unless success?
       end

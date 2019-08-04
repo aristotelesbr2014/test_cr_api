@@ -19,6 +19,9 @@ RSpec.describe Carts::AddItem do
       it 'returns id medicine from cart_item' do
         expect(subject.send(:cart).cart_items[0].medicine_id).to eq(medicine.id)
       end
+      it 'increment quantity from cart items' do
+        expect(subject.send(:cart).cart_items[0].quantity).to eql(1)
+      end
       it 'decrement stock from medicine' do
         expect(subject.send(:medicine).stock).to eql(9)
       end
