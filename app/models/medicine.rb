@@ -7,4 +7,12 @@ class Medicine < ApplicationRecord
 
   # Validations
   validates :value, :quantity, presence: true
+
+  def unavailable_stock?(amount)
+    stock < amount
+  end
+
+  def decrement_stock(amount)
+    update_attribute(:stock, (stock - amount))
+  end
 end
